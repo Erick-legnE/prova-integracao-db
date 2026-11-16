@@ -2,27 +2,30 @@ import conexao from './config/conexao.js'
 import {Equipamento} from './model/Equipamento.js'
 
 export async function criarEquipamento(equipamento) {
-    const sql = "insert into calibracoes values ?"
-    const [resultado] = await conexao.execute(sql,[equipamentoId, dataCalibracao, resultado, responsavel])
+    const sql = "insert into equipamentos values ?"
+    const [resultado] = await conexao.execute(sql,[codigoPatrimonio, nome, setor, status])
 }
 
 export async function listarEquipamentos() {
-    const sql ="select * from calibracoes left join equipamentos on calibracoes.id = equipamentos.id;"
-    return sql;
-
+    const sql = "select * from equipamentos"
+    const [resultado] = await conexao.execute(sql)
+    return resultado
 }
 
 export async function buscarEquipamentoPorId(id) {
-    const sql ="select * from calibracoes where calibracoes.id = ?"
-    return sql
+    const sql ="select * from equipamentos left join equipamentos on equipamentos.id = equipamentos.id;"
+    const [resultado] = await conexao.execute(sql)
+    return resultado
 }
 
 export async function atualizarEquipamento(id, equipamento) {
-    const sql = "update calibracoes set equipamento_id = equipamento_id, data_calibracao = data_calibracao, resultado =resultado, responsavel = responsavel where calibracoes.id = ?"
-    return sql
+    const sql = "update equipamentos set codigoPatrimonio = codigoPatrimonio, nome = nome, setor = setor where equipamentos.id = ?"
+    const [resultado] = await conexao.execute(sql,[codigoPatrimonio, nome, setor])
+    return resultado
 }
 
 export async function excluirEquipamento(id) {
-    const sql = "delete from calibracoes where calibracoes.id = ?;"
-    return sql
+    const sql = "delete from equipamentos where equipamentos.id = ?;"
+    const [resultado] = await conexao.execute(sql)
+    return resultado
 }
