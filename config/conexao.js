@@ -12,4 +12,4 @@ const conexao = mysql.createPool({
     dateStrings: ['DATE']
 })
 
-export default router;
+export default conexao;
